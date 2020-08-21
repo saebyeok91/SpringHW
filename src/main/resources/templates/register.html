@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript"
+        src="http://code.jquery.com/jquery-2.1.4.min.js">
+</script>
+<script>
+    $(document).ready(function() {
+        var formObj = $("#board");
+
+        $("#btnRegister").on("click", function() {
+            formObj.attr("action", "postRegister");
+            // action을 postRegister로 변경
+            formObj.attr("method", "post");
+            formObj.submit();
+        });
+
+        $("#btnCancel").on("click", function() {
+            self.location = "index";
+        });
+    });
+</script>
+<body>
+<h2>Register</h2>
+
+<form id="board" action="success.html"
+      th:action="@{register}"
+      th:object="${info}" method="post">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" name="id"
+                       th:field="*{id}"/></td>
+            <td><font color="red">
+                <span th:if="${#fields.hasErrors('id')}"
+                      th:errors="*{id}">
+                        ID Error Message
+                    </span>
+            </font></td>
+        </tr>
+        <tr>
+            <td>PW</td>
+            <td><input type="text" name="pw"
+                       th:field="*{pw}"/></td>
+            <td><font color="red">
+                    <span th:if="${#fields.hasErrors('pw')}"
+                          th:errors="*{pw}">
+                        PW Error Message
+                    </span>
+            </font></td>
+        </tr>
+        <tr>
+            <td>NickName</td>
+            <td><input type="text" name="nickname"
+                       th:field="*{nickname}"/></td>
+            <td><font color="red">
+                        <span th:if="${#fields.hasErrors('nickname')}"
+                              th:errors="*{nickname}">
+                            nickName Error Message
+                        </span>
+            </font></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="email"
+                       th:field="*{email}"/></td>
+            <td><font color="red">
+                        <span th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}">
+                            Email Error Message
+                        </span>
+            </font></td>
+        </tr>
+    </table>
+</form>
+
+<div>
+    <button type="submit" id="btnRegister">Register</button>
+    <button type="submit" id="btnCancel">Main</button>
+</div>
+</body>
+</html>
