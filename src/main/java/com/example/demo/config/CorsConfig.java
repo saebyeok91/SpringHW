@@ -13,3 +13,4 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**");
     }
 }
+
