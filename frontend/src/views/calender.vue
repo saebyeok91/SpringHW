@@ -18,15 +18,28 @@
           <v-icon left>mdi-pencil</v-icon>
           ADD
         </v-btn>
-        <v-dialog v-model="dialog" max-width="300">
+        <v-dialog v-model="dialog" max-width="400">
           <v-card>
             <v-card-title class="headline">Add up the event?</v-card-title>
 
             <v-card-text> 공연 일정 추가
               <v-text-field id="artist" label="Artist" type="string" />
-              <v-select :items="month" label="Month"></v-select>
-              <v-select :items="date" label="Date"></v-select>
-              <v-select :items="hour" label="Hour"></v-select>
+              <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false"
+                max-width="300px" min-width="300px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="dateFormatted"
+                    label="Date"
+                    hint="MM/DD/YYYY"
+                    persistent-hint
+                    v-bind="attrs"
+                    @blur="date = parseDate(dateFormatted)"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                  <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
+              </v-menu>
+              <v-select v-model="value" :items="hours" label="Hour"></v-select>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -72,6 +85,14 @@ export default {
     },
     nowY () {
       return this.cal ? this.cal.timeToY(this.cal.times.now) + 'px' : '-10px'
+    },
+    computedDateFormatted () {
+      return this.formatDate(this.date)
+    }
+  },
+  watch: {
+    date (val) {
+      this.dateFormatted = this.formatDate(this.date)
     }
   },
   data: () => ({
@@ -80,13 +101,10 @@ export default {
     events: [],
     colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
     names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-    month: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-    date: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-      '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-      '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
-    hour: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-      '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-    dialog: false
+    dialog: false,
+    date: new Date().toISOString().substr(0, 10),
+    menu1: false,
+    hours: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
   }),
   mounted () {
     this.ready = true
@@ -140,6 +158,18 @@ export default {
     },
     updateTime () {
       setInterval(() => this.cal.updateTimes(), 60 * 1000)
+    },
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    },
+    parseDate (date) {
+      if (!date) return null
+
+      const [month, day, year] = date.split('/')
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     }
   }
 }
@@ -167,5 +197,5 @@ export default {
     margin-top: -5px;
     margin-left: -6.5px;
   }
-  }
+}
 </style>

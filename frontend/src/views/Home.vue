@@ -2,7 +2,7 @@
   <v-responsive style="aspect-ratio: 16:9">
   <v-main id="inspire">
     <v-container fluid style="padding: 5px">
-      <v-img src="@/assets/main.jpg" max-height="700px">
+      <v-img src="@/assets/1.jpg" max-height="700px">
       <div id="header">
         <h1>NEW NORMAL</h1>
       </div>

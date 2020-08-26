@@ -2,7 +2,7 @@
   <v-main>
     <v-responsive style="aspect-ratio: 16:9">
     <v-container fluid>
-      <v-img src="@/assets/unnamed.jpg" max-height="800px">
+      <v-img src="@/assets/4.jpg" max-height="800px">
       <div id="text">
         <h1>NEW NORMAL</h1>
       </div>

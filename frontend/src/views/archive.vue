@@ -2,23 +2,22 @@
   <Layout>
     <template #content>
     <h2>PREVIOUS EVENTS</h2>
-      <v-simple-table>
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th class="text-left">No.</th>
-              <th class="text-left">Date</th>
-              <th class="text-left">Artist</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="list of lists" :key="list.title">
-              <td style="color: gray">{{ list.newsNo }}</td>
-              <td><a @click="clickNews(list.newsNo)">{{ list.title }}</a></td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
+    <v-row justify="end">
+      <v-col cols="12" sm="6">
+      </v-col>
+      <v-spacer>
+      </v-spacer>
+      <v-col>
+        <v-text-field v-model="search" append-icon="mdi-magnify"
+          label="Search" single-line hide-details>
+        </v-text-field>
+      </v-col>
+      </v-row>
+    <v-data-table
+      :headers="headers"
+      :footer-props="footerProps"
+      :search="search">
+    </v-data-table>
     </template>
   </Layout>
 </template>
@@ -34,14 +33,28 @@ export default {
     })
   },
   methods: {
+  },
+  data: function () {
+    return {
+      search: '',
+      headers: [
+        { text: 'No', align: 'start', value: 'Numbers' },
+        { text: 'Date', value: 'Date' },
+        { text: 'Artist', value: 'Artist' }
+      ],
+      footerProps: {
+        itemsPerPageText: '',
+        lastIcon: '$last',
+        nextIcon: '$next',
+        itemsPerPageOptions: []
+      }
+    }
   }
 }
 </script>
 
 <style>
-#title {
-  //border: 2px black;
-  padding: 50px;
-  align: center;
+div {
+  //border: 2px solid black;
 }
 </style>
