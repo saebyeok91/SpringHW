@@ -1,22 +1,14 @@
 <template>
   <form @submit.prevent="submit">
-    <table>
-      <tr>
-        <td>Id</td>
-        <td><input type="text" v-model="userid"></td>
-      </tr>
-      <tr>
-        <td>Password</td>
-        <td><input type="password" v-model="password"></td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center">
-          <button type="submit">Login</button>
-        </td>
-      </tr>
-    </table>
+    <v-text-field style="margin: 25px;" id="id" label="ID" v-model="userid" />
+    <v-text-field style="margin: 25px;" type="password" id="pw" label="PASSWORD" :rules="passwordRules" v-model="userPw" />
+    <v-btn style="margin-right: 25px; margin-left: 12px;" type="submit">LOG IN</v-btn>
+    <v-btn style="margin: 25px;" next to="/signUp">REGISTER</v-btn>
+    <v-btn style="margin: 25px;" next to="/adminSetup">admin</v-btn>
   </form>
 </template>
+
+//props / emit/ v-bind, v-model()
 
 <script>
 export default {
@@ -24,14 +16,15 @@ export default {
   data () {
     return {
       userid: '',
-      password: ''
+      userPw: '',
+      passwordRules: [v => !!v || '비밀번호는 필수입니다.']
     }
   },
   methods: {
     submit () {
       console.log('LoginForm submit()')
-      const { userid, password } = this
-      this.$emit('submit', { userid, password })
+      const { userid, userPw } = this
+      this.$emit('submit', { userid, userPw })
     }
   }
 }

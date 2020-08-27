@@ -35,11 +35,11 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String userName;
 
-    @Column(length = 200, nullable = false)
+    @Column(length = 300, nullable = false)
     private String userPw;
 
-    @Column(length = 200, nullable = false)
-    private String userEmail;
+    @Column(length = 300, nullable = true)
+    private String email;
 
     @Column(length = 16, nullable = false)
     private String job;

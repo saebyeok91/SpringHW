@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.Security.AuthUtil;
+import com.example.demo.security.AuthUtil;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MemberAuth;
 import com.example.demo.service.MemberAuthService;
 import com.example.demo.service.MemberService;
 import lombok.extern.java.Log;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,7 @@ import java.util.Locale;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-public class privateController {
-
+public class PrivateController {
     @Autowired
     private MemberService service;
 
@@ -37,13 +35,16 @@ public class privateController {
     @Autowired
     private MessageSource messageSource;
 
-    @PostMapping("")
+    @PostMapping("/genMember")
     public ResponseEntity<Member> register(@Validated @RequestBody Member member)
             throws Exception {
         log.info("member.getUserName(): " + member.getUserName());
+        log.info("member.getEmail(): " + member.getEmail());
 
         String inputPassword = member.getUserPw();
         member.setUserPw(passwordEncoder.encode(inputPassword));
+
+        member.setJob("General");
 
         service.register(member);
 
@@ -87,9 +88,7 @@ public class privateController {
     }
 
     // 요청한 데이터를 가지고 setup을 수행하여 db에 data를 insert
-    @RequestMapping(value = "/setup",
-            method = RequestMethod.POST,
-            produces = "text/plain;charset=UTF-8")
+    @PostMapping("/setup")
     public ResponseEntity<String> setupAdmin(@Validated @RequestBody Member member)
             throws Exception {
         log.info("setupAdmin: member.getUserName(): " + member.getUserName());
@@ -125,4 +124,3 @@ public class privateController {
         return new ResponseEntity<>(auth, HttpStatus.OK);
     }
 }
-

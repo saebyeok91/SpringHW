@@ -8,12 +8,14 @@
       </div>
         <v-row align="center" justify="center">
           <v-col sm="4" id="login">
-            <v-text-field id="id" label="ID" type="id" />
+          <form @submit.prevent="onSubmit">
+            <v-text-field id="id" label="ID" type="id" v-model="userId"/>
             <v-text-field id="email" label="E-MAIL" type="email" required v-model="email" :rules="emailRules" />
-            <v-text-field id="nickName" label="NAME" type="name" required v-model="name" />
-            <v-text-field id="pw" label="PASSWORD" type="password" required v-model="password" :rules="passwordRules" />
-            <v-btn style="margin-right: 30px;" color="gray" type="submit" :disabled="!valid">REGISTER</v-btn>
+            <v-text-field id="nickName" label="NAME" required v-model="userName" />
+            <v-text-field id="pw" label="PASSWORD" type="password" required :rules="passwordRules" v-model="userPw"/>
+            <v-btn style="margin-right: 30px;" color="gray" type="submit">REGISTER</v-btn>
             <v-btn style="margin-left: 30px;" next to="/">CANCEL</v-btn>
+          </form>
           </v-col>
         </v-row>
       </v-img>
@@ -26,13 +28,14 @@
 import axios from 'axios'
 
 export default {
+  name: 'signUp',
   data () {
     return {
       value: false,
+      userId: '',
       email: '',
-      name: '',
-      valid: [],
-      password: '',
+      userName: '',
+      userPw: '',
       emailRules: [
         v => !!v || '이메일은 필수입니다.',
         v => /.+@.+/.test(v) || '이메일이 유효하지 않습니다.'
@@ -41,17 +44,15 @@ export default {
     }
   },
   methods: {
-    onSubmit (payload) {
-      console.log('payload: ' + payload.userId +
-                  ', ' + payload.userName +
-                  ', ' + payload.userPw)
-      const { userId, userName, userPw } = payload
-      axios.post('http://localhost:1234/users/setup',
-        { userId, userName, userPw })
+    onSubmit () {
+      const { userId, userName, userPw, email } = this
+      console.log('payload:' + this.userId)
+      axios.post('http://localhost:1234/users/genMember',
+        { userId, userName, userPw, email })
         .then(res => {
           alert('Register Success')
           this.$router.push({
-            name: 'Home'
+            name: 'success'
           })
         })
         .catch(err => {
