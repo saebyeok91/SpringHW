@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home.vue'
+import home from '../views/home.vue'
 import signUp from '../views/signUp.vue'
 import signIn from '../views/signIn.vue'
 import Logout from '../views/Logout.vue'
@@ -17,8 +17,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    component: home
   },
   {
     path: '/signUp',
@@ -51,6 +51,16 @@ const routes = [
     path: '/stream',
     name: 'stream',
     component: stream
+    // beforeEnter (to, from, next) {
+    // var loginInfo = store.getters.getLoginInfo
+    // var isLogin = store.getters.getIsLogin
+    // if (loginInfo !== null && isLogin) {
+    //  next()
+    // } else {
+    // alert('Login이 필요한 서비스입니다')
+    // next({ name: home })
+    // }
+    // }
   },
   {
     path: '/success',

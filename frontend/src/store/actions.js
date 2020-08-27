@@ -12,9 +12,9 @@ import router from '../router'
 export default {
   login ({ commit }, payload) {
     console.log('actions login')
-    return axios.post(`http://localhost:1234/api/authenticate?username=${payload.userid}&password=${payload.userPw}`, {
+    return axios.post(`http://localhost:7777/api/authenticate?username=${payload.userid}&password=${payload.password}`, {
       username: payload.userid,
-      password: payload.userPw
+      password: payload.password
     }).then(res => {
       // 토큰을 얻음
       console.log('actions after post')
@@ -24,7 +24,7 @@ export default {
       // SET_ACCESS_TOKEN에 accessToken을 기록
       commit(SET_ACCESS_TOKEN, accessToken)
 
-      return axios.get('http://localhost:1234/users/myinfo')
+      return axios.get('http://localhost:7777/users/myinfo')
     }).then(res => {
       console.log('After Get Auth Info')
       commit(SET_MY_INFO, res.data)
