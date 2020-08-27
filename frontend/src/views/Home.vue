@@ -10,8 +10,9 @@
         <v-col sm="4" id="login">
           <v-text-field id="id" label="ID" type="email" required v-model="email" :rules="idRules" />
           <v-text-field id="pw" label="PASSWORD" type="password" required v-model="password" :rules="passwordRules" />
-          <v-btn style="margin-right: 30px;" type="submit" :disabled="!valid">LOG IN</v-btn>
-          <v-btn style="margin-left: 30px;" next to="/signUp">REGISTER</v-btn>
+          <v-btn style="margin-right: 60px;" @click="OnSubmit" :disabled="!valid">LOG IN</v-btn>
+          <v-btn style="margin-right: 60px;" next to="/signUp">REGISTER</v-btn>
+          <v-btn next to="/adminSetup">admin</v-btn>
          </v-col>
       </v-row>
       </v-img>
@@ -66,14 +67,6 @@ export default {
     }
   },
   methods: {
-    onSubmitForm () {
-      this.$refs.form.validate()
-      if (this.valid) {
-        alert('로그인 시도')
-      } else {
-        alert('폼이 유효하지 않습니다.')
-      }
-    },
     onSubmit (payload) {
       console.log('loginPage onSubmit()')
       this.login(payload).then(res => {

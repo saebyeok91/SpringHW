@@ -10,7 +10,7 @@ import calender from '../views/calender.vue'
 import stream from '../views/stream.vue'
 import success from '../views/success.vue'
 import apply from '../views/apply.vue'
-import test from '../views/test.vue'
+import adminSetup from '../views/adminSetup.vue'
 
 Vue.use(VueRouter)
 
@@ -63,9 +63,9 @@ const routes = [
     component: apply
   },
   {
-    path: '/test',
-    name: 'test',
-    component: test
+    path: '/adminSetup',
+    name: 'adminSetup',
+    component: adminSetup
   }
 ]
 

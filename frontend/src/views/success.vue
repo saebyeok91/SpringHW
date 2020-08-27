@@ -53,7 +53,7 @@ export default {
 
 <style>
   div {
-    border: 2px solid black;
+    //border: 2px solid black;
   }
   #title {
     padding: 50px;

@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -39,13 +41,22 @@ export default {
     }
   },
   methods: {
-    onSubmitForm () {
-      this.$refs.form.validate()
-      if (this.valid) {
-        alert('로그인 시도')
-      } else {
-        alert('폼이 유효하지 않습니다.')
-      }
+    onSubmit (payload) {
+      console.log('payload: ' + payload.userId +
+                  ', ' + payload.userName +
+                  ', ' + payload.userPw)
+      const { userId, userName, userPw } = payload
+      axios.post('http://localhost:1234/users/setup',
+        { userId, userName, userPw })
+        .then(res => {
+          alert('Register Success')
+          this.$router.push({
+            name: 'Home'
+          })
+        })
+        .catch(err => {
+          alert(err.response.data)
+        })
     }
   }
 }
