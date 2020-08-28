@@ -3,11 +3,13 @@ import {
   SET_MY_INFO,
   /* eslint-disable no-unused-vars */
   DESTROY_ACCESS_TOKEN,
-  DESTROY_MY_INFO
+  DESTROY_MY_INFO,
+  FETCH_ARCHIVE
 } from './mutation-types'
 
 import axios from 'axios'
 import router from '../router'
+import store from '../store'
 
 export default {
   login ({ commit }, payload) {
@@ -41,5 +43,12 @@ export default {
   logout ({ commit }) {
     commit(DESTROY_MY_INFO)
     commit(DESTROY_ACCESS_TOKEN)
+  },
+  fetchArchive ({ commit }) {
+    return axios.get('http://localhost:1234/boards')
+      .then(res => {
+        console.log(res)
+        commit(FETCH_ARCHIVE, res.data)
+      })
   }
 }

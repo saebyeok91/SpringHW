@@ -12,10 +12,20 @@
           label="Search" single-line hide-details>
         </v-text-field>
       </v-col>
-      </v-row>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="6">
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col align="right">
+        <v-btn to="/archiveRegister" tile mid depressed style="width: 90px;">ADD
+        </v-btn>
+      </v-col>
+    </v-row>
     <v-data-table
       :headers="headers"
       :footer-props="footerProps"
+      :items="lists"
       :search="search">
     </v-data-table>
     </template>
@@ -24,7 +34,8 @@
 
 <script>
 import Layout from '../components/Layout'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   components: { Layout },
   computed: {
@@ -32,15 +43,14 @@ export default {
       lists: state => state.lists
     })
   },
-  methods: {
-  },
   data: function () {
     return {
       search: '',
       headers: [
-        { text: 'No', align: 'start', value: 'Numbers' },
-        { text: 'Date', value: 'Date' },
-        { text: 'Artist', value: 'Artist' }
+        { text: 'No', align: 'start', value: 'boardNo' },
+        { text: 'Date', value: 'date' },
+        { text: 'Artist', value: 'artist' },
+        { text: 'Link', value: 'link' }
       ],
       footerProps: {
         itemsPerPageText: '',
@@ -49,6 +59,12 @@ export default {
         itemsPerPageOptions: []
       }
     }
+  },
+  mounted () {
+    this.fetchArchive()
+  },
+  methods: {
+    ...mapActions(['fetchArchive'])
   }
 }
 </script>

@@ -11,6 +11,7 @@ import stream from '../views/stream.vue'
 import success from '../views/success.vue'
 import apply from '../views/apply.vue'
 import adminSetup from '../views/adminSetup.vue'
+import archiveRegister from '../views/archiveRegister.vue'
 
 Vue.use(VueRouter)
 
@@ -76,6 +77,11 @@ const routes = [
     path: '/adminSetup',
     name: 'adminSetup',
     component: adminSetup
+  },
+  {
+    path: '/archiveRegister',
+    name: 'archiveRegister',
+    component: archiveRegister
   }
 ]
 
