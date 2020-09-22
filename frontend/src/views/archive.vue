@@ -48,9 +48,10 @@ export default {
       search: '',
       headers: [
         { text: 'No', align: 'start', value: 'boardNo' },
-        { text: 'Date', value: 'date' },
         { text: 'Artist', value: 'artist' },
-        { text: 'Link', value: 'link' }
+        { text: 'Date', value: 'date' },
+        { text: 'Link', value: 'link' },
+        { text: 'Social', value: 'social' }
       ],
       footerProps: {
         itemsPerPageText: '',

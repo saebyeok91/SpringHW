@@ -41,6 +41,7 @@
 import Layout from '../components/Layout'
 import axios from 'axios'
 import { mapState } from 'vuex'
+
 export default {
   components: { Layout },
   name: 'archiveRegister',
@@ -68,12 +69,14 @@ export default {
   methods: {
     onSubmit () {
       const { artist, date, link, social } = this
-      axios.post('http://localhost:1234/boards',
+      console.log('payload:' + this.artist)
+      axios.post('http://localhost:1234/boards/genPost',
         { artist, date, link, social })
         .then(res => {
           alert('Register Success')
           this.$router.push({
-            name: 'archive'
+            name: 'archive',
+            params: { boardNo: res.data.boardNo.toString() }
           })
         })
         .catch(err => {
@@ -84,12 +87,12 @@ export default {
       if (!date) return null
 
       const [year, month, day] = date.split('-')
-      return `${month}/${day}/${year}`
+      return `${year}/${month}/${day}`
     },
     parseDate (date) {
       if (!date) return null
 
-      const [month, day, year] = date.split('/')
+      const [year, month, day] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     }
   }

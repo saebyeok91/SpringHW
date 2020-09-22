@@ -41,7 +41,7 @@ export default {
         .then(res => {
           alert('Register Success')
           this.$router.push({
-            name: 'Home'
+            name: 'home'
           })
         })
         .catch(err => {

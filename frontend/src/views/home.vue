@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       value: false,
-      userid: '',
+      userId: '',
       userPw: '',
       valid: []
     }

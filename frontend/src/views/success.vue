@@ -1,37 +1,20 @@
 <template>
   <Layout>
     <template #content>
-      <!-- <v-img src="@/assets/3.jpg" max-height="700px"> -->
-        <v-row align="center" style="padding: 20px">
-          <v-col sm="3.5" style="padding: 20px" align="center">
-            <div id="text">
-              <h2>ABOUT</h2>
-            </div>
-            <div id="text">
-              <h4>본문</h4>
-            </div>
-          </v-col>
-          <v-col sm="3.5" style="padding: 20px" align="center">
-            <div id="text">
-              <h2>HOW TO</h2><br>
-            </div>
-            <div id="text">
-              <h4>본문</h4>
-            </div>
-          </v-col>
-          <v-col sm="3.5" style="padding: 20px" align="center">
-            <div id="text">
-              <h2>JOIN</h2>
-            </div>
-            <div id="text">
-              <h4>본문</h4><br>
-            </div>
-            <div>
-              <v-btn outlined next to="/apply" color="black">APPLY</v-btn>
-            </div>
-          </v-col>
-        </v-row>
-        <!-- </v-img> -->
+      <div id="text"><h2>UPCOMING EVENT</h2>
+      </div>
+      <div id="info">
+        <h3>SAEBYEOK</h3><br>
+        <h3>2020.09.19 SAT 8PM</h3>
+        <h3>#POP #IDM #SINGERSONGWRITER</h3>
+      </div>
+        <v-img src="@/assets/3.jpg" max-height="500px"></v-img>
+      <div id="info">
+        <h3>IZIHA</h3><br>
+        <h3>2020.09.26 SAT 9PM</h3>
+        <h3>#EXPERIMENTAL #ELECTRONIC </h3>
+      </div>
+        <v-img src="@/assets/4.jpg" max-height="500px"></v-img>
     </template>
   </Layout>
 </template>
@@ -55,14 +38,14 @@ export default {
   div {
     //border: 2px solid black;
   }
-  #title {
-    padding: 50px;
-    align: center;
-  }
   #text {
-    //background-color: rgba(255, 255, 255, 0.9);
-    height: 80px;
+    height: 60px;
     padding: 20px;
     color: black;
+  }
+  #info {
+    height: 150px;
+    padding: 20px;
+    color: #90A4AE;
   }
 </style>

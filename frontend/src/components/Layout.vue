@@ -10,9 +10,7 @@
       <slot name="menubar">
         <v-btn @click="Success" text color="black"
           style="padding: 10px; width: 90px;">Home</v-btn>
-        <v-btn @click="Calender" text color="black"
-          style="padding: 10px; width: 90px;">Calender</v-btn>
-        <v-btn @click="Stream" text color="black"
+        <v-btn href="http://localhost:3000" text color="black"
           style="padding: 10px; width: 90px;">Stream</v-btn>
         <v-btn @click="Archive" text color="black"
           style="padding: 10px; width: 90px;">Archive</v-btn>
@@ -55,16 +53,13 @@ export default {
     Calender () {
       (window.location.pathname !== '/calender') ? router.push('/calender') : router.go(0)
     },
-    Stream () {
-      (window.location.pathname !== '/stream') ? router.push('/stream') : router.go(0)
-    },
     Archive () {
       (window.location.pathname !== '/archive') ? router.push('/archive') : router.go(0)
     },
     onClickLogout () {
       this.logout()
       alert('Success Logout')
-      this.$router.push({ name: 'Home' })
+      this.$router.push({ name: 'home' })
     },
     ...mapActions(['logout'])
   }

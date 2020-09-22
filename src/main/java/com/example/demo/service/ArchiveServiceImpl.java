@@ -36,6 +36,8 @@ public class ArchiveServiceImpl implements ArchiveService {
     }
     @Override
     public List<Archive> list() throws Exception {
-        return eventRepo.list();
+        List<Archive> list = eventRepo.list();
+        System.out.println(list);
+        return list;
     }
 }

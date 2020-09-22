@@ -19,7 +19,7 @@ export default {
       axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
       console.log('axios Auth: ' + axios.defaults.headers.common.Authorization)
 
-      cookies.set('accessToken', accessToken, '1h')
+      cookies.set('accessToken', accessToken, 'null')
     }
   },
   [SET_MY_INFO] (state, myinfo) {

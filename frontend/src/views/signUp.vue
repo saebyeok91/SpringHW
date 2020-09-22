@@ -52,7 +52,7 @@ export default {
         .then(res => {
           alert('Register Success')
           this.$router.push({
-            name: 'success'
+            name: 'signIn'
           })
         })
         .catch(err => {

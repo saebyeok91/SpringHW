@@ -5,12 +5,16 @@ import com.example.demo.entity.Member;
 import com.example.demo.service.ArchiveService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.w3c.dom.ls.LSOutput;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Log
@@ -37,12 +41,13 @@ public class VueArchiveController {
 
     @GetMapping("")
     public ResponseEntity<List<Archive>> list() throws Exception {
+
         log.info("list()");
 
         return new ResponseEntity<>(service.list(), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/genPost")
     public ResponseEntity<Archive> register(
             @Validated @RequestBody Archive board,
             UriComponentsBuilder uriBuilder) throws Exception {
